@@ -78,12 +78,6 @@ INSERT INTO Work_Location VALUES (80,'South',20,'Keene','New Hampshire',110);
 INSERT INTO Work_Location VALUES (81,'South',22,'Hampton','New Hampshire',109);
 
 
-
-
-
-
-
-
 INSERT INTO Employee_Attendance VALUES (101,90);
 INSERT INTO Employee_Attendance VALUES (102,91);
 INSERT INTO Employee_Attendance VALUES (103,92);
@@ -115,40 +109,3 @@ INSERT INTO Salary VALUES (8,115200,60,500,1700,47);
 INSERT INTO Salary VALUES (9,57600,30,200,1000,48);
 INSERT INTO Salary VALUES (10,76800,40,300,1300,49);
 
-create directory ext_Salaries
-as 'C:\Users\phansekar.o\Desktop\Salary.csv'
-/
-
-
-create table Salary_External (
-  Salary_Id NUMBER,
-  Gross_Salary NUMBER,
-  Hourly_Pay NUMBER,
-  State_Tax NUMBER,
-  Federal_Tax NUMBER,
-  Account_Id NUMBER
-)
-organization external (
-	type oracle_loader
-	default directory ext_Salaries
-	access parameters (
-		fields terminated by ',' )
-	location ('Salary.csv')
-)
-reject limit unlimited
-/
-
-
-INSERT INTO Employee VALUES (111,'Priyanka','Jonas',to_date('14-NOV-16', 'dd-MON-yyyy'),'New York City','New York',1);
-
-commit;
-
-INSERT INTO Employee VALUES (112,'John','Vincent',to_date('21-JUN-18', 'dd-MON-yyyy'),'Boston','Massachusetts',2);
-
-SAVEPOINT A1;
-
-INSERT INTO Employee VALUES (113,'Pratik','Panhale',to_date('13-SEP-19', 'dd-MON-yyyy'),'Chicago','Illinois',3);
-
-SAVEPOINT A2;
-
-ROLLBACK A1;
